@@ -8,6 +8,8 @@
 #include "code.hpp"
 #include <iostream>
 #include <format>
+#include <string> //using == to make comparison between strings
+using namespace std;
 
 // ============================================================
 // STAGE 0: Legacy C Union
@@ -22,6 +24,18 @@
 
 std::string printLegacyData(LegacyData data, char type) {
     // TODO: Implement switch/case for 'i', 'd', 'c' and default case
+    string result = "unknown";
+
+    if (type == 'i'){
+        result = format("{}", data.i);
+        return result;
+    }
+    if (type == 'c'){
+        if (data.cPtr != NULL){
+            result = format("{}", data.cPtr);
+        }
+    }
+
     return "";
 }
 
