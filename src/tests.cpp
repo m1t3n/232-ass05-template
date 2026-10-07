@@ -8,6 +8,7 @@
 #include <iostream>
 #include <format>
 #include <string>
+using namespace std;
 
 // ============================================================
 // STAGE 0 Tests
@@ -17,14 +18,20 @@
 /// Verify the returned string matches "42".
 void test_printLegacyData_int(void) 
 {
-    TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
+    LegacyData x;
+    x.i = 42;
+    string y = printLegacyData(x, 'i');
+    TEST_ASSERT_TRUE_MESSAGE(y=="42", "y was NOT 42.");
 }
 
 /// Create a LegacyData union with a double (3.14). Call printLegacyData.
 /// Verify the returned string matches "3.14".
 void test_printLegacyData_double(void) 
 {
-    TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
+    LegacyData x;
+    x.d = 3.14;
+    string y = printLegacyData(x, 'd');
+    TEST_ASSERT_TRUE_MESSAGE(y=="3.14", "y was NOT 3.14.");
 }
 
 // ============================================================
@@ -36,7 +43,14 @@ void test_printLegacyData_double(void)
 /// Clean up allocated memory.
 void test_createTwoStructNodes_links_correctly(void) 
 {
-    TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
+    structNode *e = createTwoStructNodes();
+    TEST_ASSERT_TRUE_MESSAGE(e->value.i==5, "e was NOT 5");
+    TEST_ASSERT_TRUE_MESSAGE(e->typeData=='i', "e was NOT i");
+    TEST_ASSERT_TRUE_MESSAGE(e->nextPtr->value.d == 3.14, "e was NOT 3.14");
+    TEST_ASSERT_TRUE_MESSAGE(e->nextPtr->typeData=='d', "e was NOT d");
+
+    delete e->nextPtr;
+    delete e;
 }
 
 // ============================================================
@@ -48,7 +62,14 @@ void test_createTwoStructNodes_links_correctly(void)
 /// Clean up allocated memory.
 void test_createTwoClassNodes_links_correctly(void) 
 {
-    TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
+    classNode *e = createTwoClassNodes();
+    TEST_ASSERT_TRUE_MESSAGE(e->value.i==5, "e was NOT 5");
+    TEST_ASSERT_TRUE_MESSAGE(e->typeData=='i', "e was NOT i");
+    TEST_ASSERT_TRUE_MESSAGE(e->nextPtr->value.d == 3.14, "e was NOT 3.14");
+    TEST_ASSERT_TRUE_MESSAGE(e->nextPtr->typeData=='d', "e was NOT d");
+
+    delete e->nextPtr;
+    delete e;
 }
 
 // ============================================================
@@ -60,7 +81,12 @@ void test_createTwoClassNodes_links_correctly(void)
 /// Clean up allocated memory.
 void test_createTwoTemplateNodes_links_correctly(void) 
 {
-    TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
+    classNodeT<int> *h = createTwoTemplateNodes();
+    TEST_ASSERT_TRUE_MESSAGE(h->value==5, "h is NOT 5.");
+    TEST_ASSERT_TRUE_MESSAGE(h->nextPtr->value==3, "h is NOT 3.");
+
+    delete h->nextPtr;
+    delete h;
 }
 
 // ============================================================

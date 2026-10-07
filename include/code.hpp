@@ -35,7 +35,9 @@ std::string printLegacyData(LegacyData data, char type);
 /// - Pointer member named 'nextPtr' pointing to structNode
 /// - char member named 'typeData' ('i', 'd', 'c')
 struct structNode {
-    // TODO: Define members here
+    LegacyData value;
+    structNode *nextPtr;
+    char typeData;
 };
 
 /// Manually initializes a structNode with the given data and type.
@@ -59,6 +61,12 @@ structNode* createTwoStructNodes();
 class classNode {
 public:
     // TODO: Define members and constructor
+    LegacyData value;
+    classNode * nextPtr;
+    char typeData;
+
+    classNode(LegacyData val, char type);
+        
     // LegacyData value;
     // classNode* nextPtr;
     // char typeData;
@@ -80,12 +88,12 @@ classNode* createTwoClassNodes();
 /// YOUR TASK: Define member 'value' of type T, 'nextPtr' of type classNodeT<T>*, and constructor.
 template <typename T>
 class classNodeT {
-// public:
-//     // TODO: Define members and constructor using initializer list
-//     T value;
-//     classNodeT<T>* nextPtr;
+public:
+    // TODO: Define members and constructor using initializer list
+    T value;
+    classNodeT<T>* nextPtr;
 
-//     classNodeT(T d) : value(d), nextPtr(nullptr) {}
+    classNodeT(T d) : value(d), nextPtr(nullptr) {}
 };
 
 /// Creates two dynamically allocated classNodeT<int> objects linked together.

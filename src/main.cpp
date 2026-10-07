@@ -46,47 +46,31 @@ void tearDown(void) {}
 // Main Test Runner
 // ============================================================
 
-union LegacyData {
-    int i;
-    double d;
-    char * cPtr;
-};
-
-class Node{
-    public: int value;
-    public: Node *nextPtr;
-};
-
-template <typename T>
-class classNodeT{
-    public: T value;
-    public: classNodeT * nextPtr;
-};
 
 
 
 int main(void) 
 {
-    Node node;
-    node.value  = 5;
-    node.nextPtr = NULL;
+    // Node node;
+    // node.value  = 5;
+    // node.nextPtr = NULL;
 
-    classNodeT<int> nodeT;
-    nodeT.value = 5;
-    classNodeT<string> nodeT2;
-    nodeT2.value = "hello world";
+    // classNodeT<int> nodeT;
+    // nodeT.value = 5;
+    // classNodeT<string> nodeT2;
+    // nodeT2.value = "hello world";
 
-    cout << nodeT.value << endl;
-    cout << nodeT2.value << endl;
+    // cout << nodeT.value << endl;
+    // cout << nodeT2.value << endl;
 
-    printf("%d\n", sizeof(LegacyData));
-    LegacyData var;
+    // printf("%d\n", sizeof(LegacyData));
+    // LegacyData var;
 
-    string name = "the";
-    double num = 3.14159;
-    string formatted_str = format("my name is {:.2s} and pi is {:.2f}", name, num);
+    // string name = "the";
+    // double num = 3.14159;
+    // string formatted_str = format("my name is {:.2s} and pi is {:.2f}", name, num);
 
-    printLegacyData();
+    // printLegacyData();
 
 
     UNITY_BEGIN();
