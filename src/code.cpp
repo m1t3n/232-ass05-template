@@ -25,9 +25,9 @@ string AUTHOR_AUTHORSHIP = "I declare that I am the author of this work, take fu
 /// default -> "unknown"
 
 string printLegacyData(LegacyData data, char type) {
-    // TODO: Implement switch/case for 'i', 'd', 'c' and default case
+    // Implement switch/case for 'i', 'd', 'c' and default case
     string result = "unknown";
-
+    
     if (type == 'i')
         result = format("{}", data.i);
     if (type == 'c')
@@ -188,7 +188,7 @@ int LinkedList::addLast(classNodeVariant* newNodePtr) {
 }
 
 int LinkedList::deleteFirst() {
-    // TODO: Delete first node, update headPtr, decrement counter
+    // Delete first node, update headPtr, decrement counter
     // Return -1 if list is empty, 0 on success
     if (headPtr==NULL){
         return -1;
@@ -203,7 +203,7 @@ int LinkedList::deleteFirst() {
 }
 
 int LinkedList::deleteLast() {
-    // TODO: Find second-to-last node, delete last node, decrement counter
+    // Find second-to-last node, delete last node, decrement counter
     // Return -1 if list is empty, 0 on success
     if (headPtr == NULL){
         return -1;
@@ -211,7 +211,7 @@ int LinkedList::deleteLast() {
     if (headPtr->nextPtr == NULL){
         delete headPtr;
         counter--;
-        headPtr == NULL;
+        headPtr = NULL;
         return 0;
     }
 
@@ -229,7 +229,7 @@ int LinkedList::deleteLast() {
 }
 
 int LinkedList::deleteValue(ModernData targetValue) {
-    // TODO: Traverse list, find node matching targetValue, unlink and delete it
+    // Traverse list, find node matching targetValue, unlink and delete it
     // Decrement counter
     // Return 0 if found and removed, -1 if not found or list is empty
    if (headPtr == NULL){
@@ -262,7 +262,7 @@ int LinkedList::deleteValue(ModernData targetValue) {
 }
 
 int LinkedList::printList() {
-    // TODO: Iterate through list and print each variant value to std::cout
+    // Iterate through list and print each variant value to std::cout
     // Use std::holds_alternative or std::get
     // Return -1 if list is empty, 0 on success
     if (headPtr == NULL){
@@ -289,3 +289,5 @@ int LinkedList::listLength() {
     // Return node count
     return counter;
 }
+
+//i used google ai to explain std::holds_alternative and std::get
