@@ -27,19 +27,20 @@ string AUTHOR_AUTHORSHIP = "I declare that I am the author of this work, take fu
 string printLegacyData(LegacyData data, char type) {
     // Implement switch/case for 'i', 'd', 'c' and default case
     string result = "unknown";
-    
-    if (type == 'i')
+   if (type == 'i'){
         result = format("{}", data.i);
         return result;
-    if (type == 'c')
-        if (data.cPtr != NULL)
+   }
+    if (type == 'c'){
+        if (data.cPtr != NULL){
             result = format("{}", data.cPtr);
+        }
         return result;
-
-    if (type == 'd')
+    }
+    if (type == 'd'){
         result = format("{}", data.d);
         return result;
-    
+    }
     return "unknown";
 }
 
