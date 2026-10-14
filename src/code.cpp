@@ -203,63 +203,61 @@ int LinkedList::deleteFirst() {
 }
 
 int LinkedList::deleteLast() {
-    // Find second-to-last node, delete last node, decrement counter
-    // Return -1 if list is empty, 0 on success
-    if (headPtr == NULL){
+    if (headPtr == NULL) {
         return -1;
     }
-    if (headPtr->nextPtr == NULL){
+    // If there is only 1 node in the list
+    if (headPtr->nextPtr == NULL) {
         delete headPtr;
-        counter--;
         headPtr = NULL;
+        counter--;
         return 0;
     }
 
-    classNodeVariant *a = headPtr;
-    classNodeVariant *b = a->nextPtr;
-
-    while (a != NULL && b != NULL && b->nextPtr != NULL){
-        a = a->nextPtr;
-        b = b->nextPtr;
+    classNodeVariant *current = headPtr;
+    while (current->nextPtr->nextPtr != NULL) {
+        current = current->nextPtr;
     }
-    delete b;
-    a->nextPtr = NULL;
+    delete current->nextPtr;
+    current->nextPtr = NULL;
     counter--;
     return 0;
 }
 
+
 int LinkedList::deleteValue(ModernData targetValue) {
-    // Traverse list, find node matching targetValue, unlink and delete it
-    // Decrement counter
-    // Return 0 if found and removed, -1 if not found or list is empty
-   if (headPtr == NULL){
+
+    if (headPtr == NULL) {
         return -1;
     }
-    if (headPtr->nextPtr == NULL && headPtr->value == targetValue){ //list is one node & at head
+    // node=value
+    if (headPtr->value == targetValue) {
+        classNodeVariant *temp = headPtr->nextPtr;
         delete headPtr;
+        headPtr = temp;
         counter--;
-        headPtr = NULL;
         return 0;
-    }
+        }
+
 
     classNodeVariant *a = headPtr;
     classNodeVariant *b = a->nextPtr;
 
-    while (a != NULL && b->value != targetValue && b->nextPtr != NULL){ //check node after b
-        a = a->nextPtr;
+    while (b != NULL && b->value != targetValue) {
+        a = b;
         b = b->nextPtr;
     }
 
-    if (b->value == targetValue){
-        classNodeVariant *c = b->nextPtr;
+    if (b != NULL && b->value == targetValue) {
+        a->nextPtr = b->nextPtr;
         delete b;
-        a->nextPtr = c;
         counter--;
-        return 0; 
+        return 0;
     }
-
     return -1;
+
 }
+
 
 int LinkedList::printList() {
     // Iterate through list and print each variant value to std::cout
