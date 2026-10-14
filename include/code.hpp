@@ -37,7 +37,7 @@ string printLegacyData(LegacyData data, char type);
 /// - char member named 'typeData' ('i', 'd', 'c')
 struct structNode {
     LegacyData value;
-    structNode *nextPtr;
+    structNode* nextPtr;
     char typeData;
 };
 
@@ -61,9 +61,9 @@ structNode* createTwoStructNodes();
 /// YOUR TASK: Define public members (value, nextPtr, typeData) and constructor declaration.
 class classNode {
 public:
-    // TODO: Define members and constructor
+    // Define members and constructor
     LegacyData value;
-    classNode * nextPtr;
+    classNode* nextPtr;
     char typeData;
 
     classNode(LegacyData val, char type);

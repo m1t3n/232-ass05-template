@@ -30,13 +30,17 @@ string printLegacyData(LegacyData data, char type) {
     
     if (type == 'i')
         result = format("{}", data.i);
+        return result;
     if (type == 'c')
         if (data.cPtr != NULL)
             result = format("{}", data.cPtr);
+        return result;
+
     if (type == 'd')
         result = format("{}", data.d);
+        return result;
     
-    return result;
+    return "unknown";
 }
 
 
