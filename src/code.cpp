@@ -64,12 +64,12 @@ void initStructNode(structNode* nPtr, LegacyData val, char type) {
 /// Returns pointer to Node 1.
 structNode* createTwoStructNodes() {
     structNode *a = new structNode;
-    LegacyData c;
+    LegacyData c = {0};
     c.i = 5;
     initStructNode(a, c, 'i');
 
     structNode *b = new structNode;
-    LegacyData d;
+    LegacyData d = {0};
     d.d = 3.14;
     initStructNode(b, d, 'd');
 
@@ -101,11 +101,11 @@ classNode::classNode(LegacyData val, char type) {
 /// Dynamically allocates two classNodes (int 5, double 3.14) and links them.
 classNode* createTwoClassNodes() {
 
-    LegacyData x;
+    LegacyData x = {0};
     x.i = 5;
     classNode *a = new classNode(x,'i');
 
-    LegacyData y;
+    LegacyData y = {0};
     y.d = 3.14;
     classNode *b = new classNode(y, 'd');
 
