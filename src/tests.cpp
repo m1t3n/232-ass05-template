@@ -46,7 +46,7 @@ void test_createTwoStructNodes_links_correctly(void)
     structNode *e = createTwoStructNodes();
     TEST_ASSERT_TRUE_MESSAGE(e->value.i==5, "e was NOT 5");
     TEST_ASSERT_TRUE_MESSAGE(e->typeData=='i', "e was NOT i");
-    TEST_ASSERT_EQUAL_DOUBLE_MESSAGE(3.14, e->nextPtr->value.d, "e was NOT 3.14");
+    TEST_ASSERT_TRUE_MESSAGE(e->nextPtr->value.d==3.14, "e was NOT 3.14");
     TEST_ASSERT_TRUE_MESSAGE(e->nextPtr->typeData=='d', "e was NOT d");
 
     delete e->nextPtr;
@@ -65,7 +65,7 @@ void test_createTwoClassNodes_links_correctly(void)
     classNode *e = createTwoClassNodes();
     TEST_ASSERT_TRUE_MESSAGE(e->value.i==5, "e was NOT 5");
     TEST_ASSERT_TRUE_MESSAGE(e->typeData=='i', "e was NOT i");
-    TEST_ASSERT_EQUAL_DOUBLE_MESSAGE(3.14, e->nextPtr->value.d, "e was NOT 3.14");
+    TEST_ASSERT_TRUE_MESSAGE(e->nextPtr->value.d==3.14, "e was NOT 3.14");
     TEST_ASSERT_TRUE_MESSAGE(e->nextPtr->typeData=='d', "e was NOT d");
 
     delete e->nextPtr;
