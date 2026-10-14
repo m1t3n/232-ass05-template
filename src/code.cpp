@@ -32,16 +32,17 @@ string printLegacyData(LegacyData data, char type) {
         return result;
    }
     if (type == 'c'){
-        if (data.cPtr != NULL){
-            result = format("{}", data.cPtr);
+        if (data.cPtr == NULL){
+            return "nullptr";
         }
+        result = format("{}", data.cPtr);
         return result;
     }
     if (type == 'd'){
         result = format("{}", data.d);
         return result;
     }
-    return "unknown";
+    return result;
 }
 
 
