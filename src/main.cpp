@@ -100,3 +100,55 @@ int main(void)
     int result = UNITY_END();
     return result;
 }
+
+
+
+
+
+/*
+class DoublyLinkedList{
+    private: DoubleNode * headPtr;
+    private: DoubleNode * tailPtr;
+    private: int counter;
+
+    public: DoublyLinkedList();
+    public: ~DoublyLinkedList();
+    void test(){
+        DoubleNode * node = new DoubleNode(5);
+        
+    }
+};
+
+
+
+class DoubleNode
+{
+private:     int         value;
+private:     DoubleNode  *prevPtr;
+private:     DoubleNode  *nextPtr;
+private:    friend class DoublyLinkedList;   // the owner may touch links
+
+//public:     explicit DoubleNode(int value) : value(value), prevPtr(nullptr), nextPtr(nullptr) {}
+public:     explicit DoubleNode(int value)
+{
+    this->value = value;
+}
+public:     int getValue() const { return value; }
+public:     DoubleNode * getPrevPtr() const { return prevPtr; }
+public:     DoubleNode * getNextPtr() const { return nextPtr; }
+
+public:     void setValue(int value) { this->value = value; }
+public:     void setPrevPtr(DoubleNode * inputPrevPtr) { this->prevPtr = inputPrevPtr; }
+public:     void setNextPtr(DoubleNode * inputNextPtr) { this-> nextPtr = inputNextPtr; }
+
+
+};
+
+int main(void){
+    DoubleNode * node = new DoubleNode(5);
+    int result = node->getValue();
+    node->setValue(6);
+    result = node->getValue();
+
+}
+*/

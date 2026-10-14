@@ -24,7 +24,7 @@ string AUTHOR_AUTHORSHIP = "I declare that I am the author of this work, take fu
 /// 'c' -> string pointer content (or "nullptr" if cPtr is null)
 /// default -> "unknown"
 
-std::string printLegacyData(LegacyData data, char type) {
+string printLegacyData(LegacyData data, char type) {
     // TODO: Implement switch/case for 'i', 'd', 'c' and default case
     string result = "unknown";
 
@@ -38,6 +38,7 @@ std::string printLegacyData(LegacyData data, char type) {
     
     return result;
 }
+
 
 // ============================================================
 // STAGE 1: C-Style Struct
@@ -93,7 +94,7 @@ classNode::classNode(LegacyData val, char type) {
  
 /// Dynamically allocates two classNodes (int 5, double 3.14) and links them.
 classNode* createTwoClassNodes() {
-    // TODO: Allocate dynamically, link nodes, and return head
+
     LegacyData x;
     x.i = 5;
     classNode *a = new classNode(x,'i');
@@ -117,8 +118,6 @@ classNodeT<int>* createTwoTemplateNodes() {
     classNodeT<int> *g = new classNodeT<int>(3);
     f->nextPtr = g;
     return f;
-
-    // TODO: Instantiate classNodeT<int> nodes using new, link them, and return head
 }
 
 // ============================================================
@@ -127,58 +126,166 @@ classNodeT<int>* createTwoTemplateNodes() {
 
 // uncomment the following code to implement the LinkedList methods
 
-// LinkedList::LinkedList() {
-//     // TODO: Initialize headPtr to nullptr and counter to 0
-// }
+LinkedList::LinkedList() {
+    // Initialize headPtr to nullptr and counter to 0
+    headPtr = NULL;
+    counter = 0;
+}
 
-// LinkedList::~LinkedList() {
-//     // TODO: Clean up memory by calling destroyList()
-// }
-//uncoment the following code to implement the LinkedList methods
+LinkedList::~LinkedList() {
+    // Clean up memory by calling destroyList()
+    destroyList();
+}
 
-// void LinkedList::destroyList() {
-//     // TODO: Iterate through list, delete all nodes, and reset counter to 0
-// }
 
-// int LinkedList::addFirst(classNodeVariant* newNodePtr) {
-//     // TODO: Prepend node to the front of list, increment counter
-//     // Return -1 if newNodePtr is nullptr, 0 on success
-//     return -1;
-// }
+void LinkedList::destroyList() {
+    // Iterate through list, delete all nodes, and reset counter to 0
+    if (headPtr == NULL){
+        return;
+    }
 
-// int LinkedList::addLast(classNodeVariant* newNodePtr) {
-//     // TODO: Append node to the end of list, increment counter
-//     // Return -1 if newNodePtr is nullptr, 0 on success
-//     return -1;
-// }
+    while (headPtr != NULL){
+        classNodeVariant *temp = headPtr->nextPtr;
+        delete headPtr;
+        headPtr = temp;
+    }
+    counter = 0;
+    
+}
 
-// int LinkedList::deleteFirst() {
-//     // TODO: Delete first node, update headPtr, decrement counter
-//     // Return -1 if list is empty, 0 on success
-//     return -1;
-// }
+int LinkedList::addFirst(classNodeVariant* newNodePtr) {
 
-// int LinkedList::deleteLast() {
-//     // TODO: Find second-to-last node, delete last node, decrement counter
-//     // Return -1 if list is empty, 0 on success
-//     return -1;
-// }
+    if (newNodePtr == NULL){
+        return -1;
+    }
 
-// int LinkedList::deleteValue(ModernData targetValue) {
-//     // TODO: Traverse list, find node matching targetValue, unlink and delete it
-//     // Decrement counter
-//     // Return 0 if found and removed, -1 if not found or list is empty
-//     return -1;
-// }
+    newNodePtr->nextPtr = headPtr;
+    headPtr = newNodePtr;
+    counter++;
 
-// int LinkedList::printList() {
-//     // TODO: Iterate through list and print each variant value to std::cout
-//     // Use std::holds_alternative or std::get
-//     // Return -1 if list is empty, 0 on success
-//     return -1;
-// }
+    // Prepend node to the front of list, increment counter
+    // Return -1 if newNodePtr is nullptr, 0 on success
+    return 0;
+}
 
-// int LinkedList::listLength() {
-//     // TODO: Return node count
-//     return 0;
-// }
+int LinkedList::addLast(classNodeVariant* newNodePtr) {
+    // TODO: Append node to the end of list, increment counter
+    // Return -1 if newNodePtr is nullptr, 0 on success
+    if (newNodePtr == NULL){
+        return -1;
+    }
+    if (headPtr == NULL){
+        return addFirst(newNodePtr); //if it's empty last=first
+    }
+
+    classNodeVariant *currentPtr = headPtr;
+    while (currentPtr != NULL && currentPtr->nextPtr != NULL){
+        currentPtr = currentPtr->nextPtr;
+    }
+    currentPtr->nextPtr = newNodePtr;
+    counter++;
+    return 0;
+}
+
+int LinkedList::deleteFirst() {
+    // TODO: Delete first node, update headPtr, decrement counter
+    // Return -1 if list is empty, 0 on success
+    if (headPtr==NULL){
+        return -1;
+    }
+
+    classNodeVariant *temp = headPtr->nextPtr;
+    delete headPtr;
+    headPtr = temp;
+
+    counter--;
+    return 0;
+}
+
+int LinkedList::deleteLast() {
+    // TODO: Find second-to-last node, delete last node, decrement counter
+    // Return -1 if list is empty, 0 on success
+    if (headPtr == NULL){
+        return -1;
+    }
+    if (headPtr->nextPtr == NULL){
+        delete headPtr;
+        counter--;
+        headPtr == NULL;
+        return 0;
+    }
+
+    classNodeVariant *a = headPtr;
+    classNodeVariant *b = a->nextPtr;
+
+    while (a != NULL && b != NULL && b->nextPtr != NULL){
+        a = a->nextPtr;
+        b = b->nextPtr;
+    }
+    delete b;
+    a->nextPtr = NULL;
+    counter--;
+    return 0;
+}
+
+int LinkedList::deleteValue(ModernData targetValue) {
+    // TODO: Traverse list, find node matching targetValue, unlink and delete it
+    // Decrement counter
+    // Return 0 if found and removed, -1 if not found or list is empty
+   if (headPtr == NULL){
+        return -1;
+    }
+    if (headPtr->nextPtr == NULL && headPtr->value == targetValue){ //list is one node & at head
+        delete headPtr;
+        counter--;
+        headPtr = NULL;
+        return 0;
+    }
+
+    classNodeVariant *a = headPtr;
+    classNodeVariant *b = a->nextPtr;
+
+    while (a != NULL && b->value != targetValue && b->nextPtr != NULL){ //check node after b
+        a = a->nextPtr;
+        b = b->nextPtr;
+    }
+
+    if (b->value == targetValue){
+        classNodeVariant *c = b->nextPtr;
+        delete b;
+        a->nextPtr = c;
+        counter--;
+        return 0; 
+    }
+
+    return -1;
+}
+
+int LinkedList::printList() {
+    // TODO: Iterate through list and print each variant value to std::cout
+    // Use std::holds_alternative or std::get
+    // Return -1 if list is empty, 0 on success
+    if (headPtr == NULL){
+        return -1;
+    }
+
+    classNodeVariant *curr = headPtr;
+    while (curr != NULL){
+        if (holds_alternative<int>(curr->value)){
+            cout << get<int>(curr->value);
+        }
+        else if (holds_alternative<string>(curr->value)){
+            cout << get<string>(curr->value);
+        }
+        else if (holds_alternative<double>(curr->value)){
+            cout << get<double>(curr->value);
+        }
+        curr = curr->nextPtr;
+    }
+    return 0;
+}
+
+int LinkedList::listLength() {
+    // Return node count
+    return counter;
+}

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <variant>
+using namespace std;
 
 // ============================================================
 // STAGE 0: Legacy C Union
@@ -23,7 +24,7 @@ union LegacyData {
 /// @param data The union to convert
 /// @param type Character type indicator: 'i'=int, 'd'=double, 'c'=char*
 /// @return Formatted string representation ("42", "3.14", string value, or "unknown")
-std::string printLegacyData(LegacyData data, char type);
+string printLegacyData(LegacyData data, char type);
 
 // ============================================================
 // STAGE 1: C-Style Struct
@@ -106,36 +107,40 @@ classNodeT<int>* createTwoTemplateNodes();
 // ============================================================
 
 /// Type alias for modern C++17 variant supporting int, double, or std::string.
-using ModernData = std::variant<int, double, std::string>;
+using ModernData = variant<int, double, string>;
 
 /// A modern C++17 linked list node using std::variant for type-safe storage.
 class classNodeVariant {
 public:
-    // ModernData value;
-    // classNodeVariant* nextPtr;
+    ModernData value;
+    classNodeVariant* nextPtr;
 
-    // /// Constructor using member initializer list.
-    // classNodeVariant(ModernData d) : value(d), nextPtr(nullptr) {}
+    /// Constructor using member initializer list.
+    classNodeVariant(ModernData d) : value(d), nextPtr(nullptr) {}
 };
 
 /// A fully encapsulated linked list manager for classNodeVariant objects.
 /// YOUR TASK: Declare private members (headPtr, counter) and public methods.
+
+
 class LinkedList {
-// private:
-//     // TODO: Add headPtr (classNodeVariant*) and counter (int)
+private:
+    // Add headPtr (classNodeVariant*) and counter (int)
+    classNodeVariant *headPtr;
+    int counter;
 
-// public:
-//     LinkedList();
-//     ~LinkedList();
+public:
+    LinkedList();
+    ~LinkedList();
 
-//     void destroyList();
-//     int addFirst(classNodeVariant* newNodePtr);
-//     int addLast(classNodeVariant* newNodePtr);
-//     int deleteFirst();
-//     int deleteLast();
-//     int deleteValue(ModernData targetValue);
-//     int printList();
-//     int listLength();
+    void destroyList();
+    int addFirst(classNodeVariant* newNodePtr);
+    int addLast(classNodeVariant* newNodePtr);
+    int deleteFirst();
+    int deleteLast();
+    int deleteValue(ModernData targetValue);
+    int printList();
+    int listLength();
 };
 
 #endif
